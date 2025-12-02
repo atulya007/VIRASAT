@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaipur - The Pink City</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f1e8;
+        }
+
+        header {
+            background: linear-gradient(135deg, #f7931e 0%, #ff6b35 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #f7931e, #ff6b35);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            z-index: 100;
+            transition: transform 0.3s;
+        }
+
+        .back-button:hover {
+            transform: scale(1.05);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            background: white;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        section h2 {
+            color: #f7931e;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #ff6b35;
+            padding-bottom: 0.5rem;
+        }
+
+        .map-container {
+            background: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 400px;
+            margin-bottom: 1.5rem;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .places-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .place-card {
+            background: #f9f7f4;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 5px solid #f7931e;
+            transition: transform 0.3s;
+        }
+
+        .place-card:hover {
+            transform: translateX(10px);
+        }
+
+        .place-card h3 {
+            color: #f7931e;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .place-card p {
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .place-map {
+            width: 100%;
+            height: 250px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .cuisine-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .cuisine-item {
+            background: linear-gradient(135deg, #ffe6cc, #fff5e6);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid #f7931e;
+        }
+
+        .cuisine-item h3 {
+            color: #f7931e;
+            margin-bottom: 0.5rem;
+        }
+
+        .cuisine-item p {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .about-text {
+            line-height: 1.8;
+            color: #444;
+            text-align: justify;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        footer {
+            background: #2c1810;
+            color: #f4e4d7;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .back-button {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+
+            .map-container {
+                height: 300px;
+            }
+
+            .place-map {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">← Back to Home</a>
+
+    <header>
+        <h1>🏰 Jaipur - The Pink City 🏰</h1>
+        <p>Royal Heritage and Architectural Splendor</p>
+    </header>
+
+    <div class="container">
+        <!-- Map Section -->
+        <section>
+            <h2>📍 Location Map</h2>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.0893098648703!2d75.7873!3d26.9124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396c4adf4c57a28d%3A0xce1c63a3b6012e89!2sJaipur%2C%20Rajasthan!5e0!3m2!1sen!2sin!4v1701520000000" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+
+        <!-- Popular Places Section -->
+        <section>
+            <h2>🏛️ Popular Places to Visit</h2>
+            <div class="places-grid">
+                <div class="place-card">
+                    <h3>Amber Fort (Amer Palace)</h3>
+                    <p>A majestic hilltop fortress and palace complex, blending Hindu and Mughal architecture. Known for its stunning views over Jaipur, intricate decorations, and elephant rides.</p>
+                    <div class="place-map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3609.9243456789!2d75.85094!3d26.94456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396c4a7b8d3b8b2b%3A0x5e5e5e5e5e5e5e5e!2sAmber%20Fort!5e0!3m2!1sen!2sin!4v1701520000000" style="width:100%; height:100%; border:none;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+
+                <div class="place-card">
+                    <h3>Hawa Mahal - Palace of Winds</h3>
+                    <p>The iconic pink structure with 953 small windows, built in 1799. It's an architectural marvel that once allowed royal women to observe city life without being seen.</p>
+                    <div class="place-map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3611.0783456789!2d75.82656!3d26.92565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396c4adc8d3b8b2b%3A0x5e5e5e5e5e5e5e5e!2sHawa%20Mahal!5e0!3m2!1sen!2sin!4v1701520000000" style="width:100%; height:100%; border:none;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+
+                <div class="place-card">
+                    <h3>City Palace</h3>
+                    <p>A stunning blend of Rajasthani and Mughal architecture, still partially inhabited by the royal family. Features intricate courtyards, gardens, and a remarkable museum.</p>
+                    <div class="place-map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3611.0883456789!2d75.82756!3d26.92465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396c4a1e8d3b8b2b%3A0x5e5e5e5e5e5e5e5e!2sCity%20Palace%20Jaipur!5e0!3m2!1sen!2sin!4v1701520000000" style="width:100%; height:100%; border:none;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+
+                <div class="place-card">
+                    <h3>Jantar Mantar Observatory</h3>
+                    <p>A UNESCO World Heritage Site and architectural wonder built by Maharaja Jai Singh II. An ancient astronomical observation instrument collection with 19 architectural astronomical instruments.</p>
+                    <div class="place-map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3611.1083456789!2d75.82956!3d26.92365!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396c4a0e8d3b8b2b%3A0x5e5e5e5e5e5e5e5e!2sJantar%20Mantar!5e0!3m2!1sen!2sin!4v1701520000000" style="width:100%; height:100%; border:none;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cuisine Section -->
+        <section>
+            <h2>🍜 Traditional Cuisine of Jaipur</h2>
+            <div class="cuisine-grid">
+                <div class="cuisine-item">
+                    <h3>🍲 Dal Baati Churma</h3>
+                    <p>The signature Rajasthani dish of baked wheat balls (baati) served with lentil curry (dal) and sweet crumbled wheat (churma). A hearty, filling, and authentic Rajasthani experience.</p>
+                </div>
+
+                <div class="cuisine-item">
+                    <h3>🥘 Laal Maas</h3>
+                    <p>A fiery red curry made with tender meat and a blend of red spices. One of Rajasthan's most famous dishes, known for its bold, spicy flavor and royal heritage.</p>
+                </div>
+
+                <div class="cuisine-item">
+                    <h3>🍰 Ghewar</h3>
+                    <p>A sweet, disc-shaped dessert made with refined flour, ghee, and milk, topped with khoya and dry fruits. A traditional festival dessert that's crispy, sweet, and absolutely delicious.</p>
+                </div>
+
+                <div class="cuisine-item">
+                    <h3>🥨 Pyaaz Kachori</h3>
+                    <p>Deep-fried pastry pockets filled with spiced onions and lentils. A savory snack from Jaipur known for its perfect balance of flavors and crispy, golden exterior.</p>
+                </div>
+
+                <div class="cuisine-item">
+                    <h3>🍬 Kalakand</h3>
+                    <p>A traditional Indian sweet made from solidified milk and paneer. Soft, creamy, and flavored with cardamom and nuts, it's a popular gift and festive treat in Rajasthan.</p>
+                </div>
+
+                <div class="cuisine-item">
+                    <h3>🍱 Rajasthani Thali</h3>
+                    <p>A complete meal served on a large platter with various curries, breads, pickles, and accompaniments. Offers a complete taste of Rajasthani culinary traditions in one serving.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section>
+            <h2>📖 About Jaipur</h2>
+            <div class="about-text">
+                <p>
+                    Jaipur, the capital of Rajasthan, is one of India's most planned and visually striking cities, famously known as "The Pink City" due to its distinctive terracotta-colored buildings. Founded in 1727 by Maharaja Jai Singh II, Jaipur was one of the first planned cities in India, designed using the principles of ancient Hindu architecture and Mughal city planning. The city's grid-based layout and consistent architecture make it a unique urban gem that continues to attract visitors from around the world who come to experience its royal grandeur and architectural excellence.
+                </p>
+
+                <p>
+                    The heart of Jaipur is dominated by magnificent monuments that showcase the brilliance of Rajasthani architecture. Amber Fort, perched on a hilltop overlooking the city, is a breathtaking blend of Hindu and Mughal styles with ornate decorations, intricate mirror work, and commanding views. The Hawa Mahal, or Palace of Winds, is perhaps Jaipur's most iconic structure—a five-story pink building with 953 small windows carved in geometric patterns. This extraordinary architectural marvel was originally designed as a privacy screen for royal women to observe street life and festivals without being seen. The City Palace remains a testament to the fusion of Rajasthani and Western architecture, while Jantar Mantar, a UNESCO World Heritage Site, showcases Maharaja Jai Singh II's fascination with astronomy with its collection of 19 astronomical observation instruments.
+                </p>
+
+                <p>
+                    Beyond its architectural wonders, Jaipur is a vibrant cultural hub renowned for its traditional arts and crafts. Block printing, blue pottery, tie-and-dye fabrics (bandhani), gem cutting, and jewelry work are practiced by artisans who have maintained their ancestral techniques for generations. The city's bazaars are treasure troves where visitors can find exquisite traditional textiles, precious stones, and handcrafted items. Jaipur is particularly famous for its blue pottery, a craft that's unique to the city and reflects the influence of Persian and Mughal traditions.
+                </p>
+
+                <p>
+                    The culinary traditions of Jaipur are an integral part of Rajasthan's cultural identity. Dishes like Dal Baati Churma showcase the simplicity and robustness of rural Rajasthani cuisine, while dishes like Laal Maas represent the royal heritage and sophisticated palates of the region's rulers. Ghewar, a legendary dessert, and Kalakand sweets are confections that have been cherished for centuries. Street food in Jaipur, from Kachoris to Samosas, is legendary and offers an authentic taste of the region's culinary spirit.
+                </p>
+
+                <p>
+                    Jaipur's festivals are celebrations of color, music, and tradition. The Elephant Festival sees decorated elephants parading through the city, while Teej and Gangaur festivals celebrate the monsoon and spring seasons with traditional music, dance, and rituals. The city maintains its royal heritage through ongoing conservation efforts and cultural performances. Today, Jaipur stands as a perfect blend of history and modernity, where ancient palaces coexist with contemporary urban life, making it not just a destination for tourists but a living museum of Rajasthan's glorious past and vibrant present.
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p><strong>Preserving India's Cultural Legacy</strong></p>
+        <p>Celebrating the heritage of Jaipur</p>
+        <p>© 2024 - A tribute to India's timeless traditions</p>
+    </footer>
+</body>
+</html>

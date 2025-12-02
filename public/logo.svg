@@ -1,0 +1,37 @@
+<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Lotus flower -->
+  <g id="lotus">
+    <!-- Outer petals -->
+    <path d="M 150 50 Q 130 80 140 120 Q 150 90 160 120 Q 170 80 150 50" fill="#C87137" stroke="#3E2723" stroke-width="2"/>
+    <path d="M 150 50 Q 140 70 170 100 Q 155 85 180 105 Q 160 65 150 50" fill="#D4845C" stroke="#3E2723" stroke-width="2"/>
+    <path d="M 150 50 Q 160 70 130 100 Q 145 85 120 105 Q 140 65 150 50" fill="#D4845C" stroke="#3E2723" stroke-width="2"/>
+    
+    <!-- Middle petals -->
+    <path d="M 200 150 Q 170 140 150 160 Q 170 155 160 180 Q 180 165 200 150" fill="#C87137" stroke="#3E2723" stroke-width="2"/>
+    <path d="M 100 150 Q 130 140 150 160 Q 130 155 140 180 Q 120 165 100 150" fill="#C87137" stroke="#3E2723" stroke-width="2"/>
+    <path d="M 150 250 Q 140 220 160 200 Q 150 215 150 190 Q 150 215 150 250" fill="#C87137" stroke="#3E2723" stroke-width="2"/>
+    
+    <!-- Inner petals -->
+    <path d="M 150 100 Q 160 110 170 110 Q 160 120 150 120 Q 140 120 130 110 Q 140 110 150 100" fill="#E8B4A0" stroke="#3E2723" stroke-width="1.5"/>
+    <path d="M 180 130 Q 185 145 180 155 Q 175 140 170 140 Q 175 130 180 130" fill="#E8B4A0" stroke="#3E2723" stroke-width="1.5"/>
+    <path d="M 120 130 Q 115 145 120 155 Q 125 140 130 140 Q 125 130 120 130" fill="#E8B4A0" stroke="#3E2723" stroke-width="1.5"/>
+    
+    <!-- Center circle -->
+    <circle cx="150" cy="140" r="15" fill="#F5DEB3" stroke="#3E2723" stroke-width="2"/>
+    <circle cx="150" cy="140" r="10" fill="#E8B4A0" stroke="#3E2723" stroke-width="1"/>
+  </g>
+  
+  <!-- Decorative swirls left -->
+  <path d="M 80 150 Q 70 145 65 150 Q 70 155 85 148" fill="none" stroke="#3E2723" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 75 160 Q 55 165 50 160" fill="none" stroke="#3E2723" stroke-width="2.5" stroke-linecap="round"/>
+  
+  <!-- Decorative swirls right -->
+  <path d="M 220 150 Q 230 145 235 150 Q 230 155 215 148" fill="none" stroke="#3E2723" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 225 160 Q 245 165 250 160" fill="none" stroke="#3E2723" stroke-width="2.5" stroke-linecap="round"/>
+  
+  <!-- Text: VIRASAT -->
+  <text x="150" y="200" font-family="Georgia, serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#3E2723">VIRASAT</text>
+  
+  <!-- Subtitle -->
+  <text x="150" y="225" font-family="Georgia, serif" font-size="11" text-anchor="middle" fill="#5D4037" letter-spacing="2">EXPLORING INDIAN CULTURE &amp; HERITAGE</text>
+</svg>

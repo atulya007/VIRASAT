@@ -1,0 +1,45 @@
+## Node / Next.js
+node_modules/
+.next/
+out/
+dist/
+build/
+
+# Local env files
+.env
+.env.*
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Mac / Linux metadata
+*.swp
+
+# Typescript
+*.tsbuildinfo
+
+# OneDrive / syncing
+~$* 
+*.lnk
+
+# build artifacts
+coverage/
+reports/
+
+# Public uploaded images you may want to keep but if you have large images uncomment below
+# public/images/

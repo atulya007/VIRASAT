@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Varanasi & Jaipur Cultural Heritage</title>
+    <style>
+        /* Modal Styles */
+        .modal {
+            display: flex;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 600px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-content h1 {
+            color: #c41e3a;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .modal-content p {
+            color: #333;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .modal-btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-varanasi {
+            background: linear-gradient(135deg, #c41e3a, #8b0000);
+            color: white;
+        }
+
+        .btn-varanasi:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(196, 30, 58, 0.4);
+        }
+
+        .btn-jaipur {
+            background: linear-gradient(135deg, #f7931e, #ff6b35);
+            color: white;
+        }
+
+        .btn-jaipur:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(247, 147, 30, 0.4);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- City Selection Modal -->
+    <div id="cityModal" class="modal">
+        <div class="modal-content">
+            <h1>🕉️ 🏰 Welcome to India's Heritage 🏰 🕉️</h1>
+            <p>Choose a city to explore its rich cultural heritage, landmarks, cuisine, and traditions</p>
+            <div class="modal-buttons">
+                <a href="varanasi.html" class="modal-btn btn-varanasi">🛕 Varanasi - The Eternal City</a>
+                <a href="jaipur.html" class="modal-btn btn-jaipur">🏰 Jaipur - The Pink City</a>
+            </div>
+        </div>
+    </div>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #c41e3a 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+
+        nav {
+            background: #2c1810;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #f4e4d7;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+            font-size: 1.1rem;
+        }
+
+        nav a:hover {
+            color: #ff6b35;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23c41e3a" width="1200" height="600"/><path fill="%23ff6b35" opacity="0.3" d="M0 300 Q300 200 600 300 T1200 300 V600 H0Z"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .city-section {
+            margin-bottom: 4rem;
+        }
+
+        .city-header {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .city-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #c41e3a, #8b0000);
+            color: white;
+            padding: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-content h3 {
+            color: #c41e3a;
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+
+        .card-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card-content li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .card-content li::before {
+            content: "•";
+            color: #ff6b35;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+        }
+
+        footer {
+            background: #2c1810;
+            color: #f4e4d7;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        .pattern-bg {
+            background: linear-gradient(135deg, #fff5e6 25%, transparent 25%),
+                        linear-gradient(225deg, #fff5e6 25%, transparent 25%),
+                        linear-gradient(45deg, #fff5e6 25%, transparent 25%),
+                        linear-gradient(315deg, #fff5e6 25%, #ffffff 25%);
+            background-size: 40px 40px;
+            background-position: 0 0, 0 20px, 20px -20px, -20px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🕉️ Varanasi & Jaipur Heritage 🏰</h1>
+        <p>Preserving and Promoting India's Cultural Treasures</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#varanasi">Varanasi</a></li>
+            <li><a href="#jaipur">Jaipur</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero">
+        <h2>Journey Through Sacred and Royal India</h2>
+        <p>Explore the spiritual heart of Varanasi and the regal grandeur of Jaipur - two cities that embody the soul of India's rich cultural heritage</p>
+    </div>
+
+    <div class="container pattern-bg">
+        <!-- VARANASI SECTION -->
+        <section id="varanasi" class="city-section">
+            <div class="city-header">
+                <h2>Varanasi - The Eternal City</h2>
+                <p>Kashi, Banaras - The Spiritual Capital of India</p>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="card-header">🛕 Famous Landmarks</div>
+                    <div class="card-content">
+                        <h3>Sacred Ghats & Temples</h3>
+                        <ul>
+                            <li>Kashi Vishwanath Temple</li>
+                            <li>Dashashwamedh Ghat</li>
+                            <li>Assi Ghat</li>
+                            <li>Manikarnika Ghat</li>
+                            <li>Sarnath - Buddhist Site</li>
+                            <li>Ramnagar Fort</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">🍛 Traditional Cuisine</div>
+                    <div class="card-content">
+                        <h3>Flavors of Banaras</h3>
+                        <ul>
+                            <li>Banarasi Paan</li>
+                            <li>Kachori Sabzi</li>
+                            <li>Baati Chokha</li>
+                            <li>Malaiyo (winter delicacy)</li>
+                            <li>Launglata</li>
+                            <li>Tamatar Chaat</li>
+                            <li>Lassi & Thandai</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">🎨 Traditional Arts</div>
+                    <div class="card-content">
+                        <h3>Artistic Heritage</h3>
+                        <ul>
+                            <li>Banarasi Silk Sarees</li>
+                            <li>Classical Music & Dance</li>
+                            <li>Tabla Making</li>
+                            <li>Wooden Toys</li>
+                            <li>Brassware Crafts</li>
+                            <li>Miniature Paintings</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">🪔 Cultural Traditions</div>
+                    <div class="card-content">
+                        <h3>Living Heritage</h3>
+                        <ul>
+                            <li>Ganga Aarti Ceremony</li>
+                            <li>Dev Deepawali Festival</li>
+                            <li>Classical Hindustani Music</li>
+                            <li>Boat Rides at Dawn</li>
+                            <li>Temple Rituals</li>
+                            <li>Street Storytelling</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- JAIPUR SECTION -->
+        <section id="jaipur" class="city-section">
+            <div class="city-header" style="background: linear-gradient(135deg, #f7931e, #ff6b35);">
+                <h2>Jaipur - The Pink City</h2>
+                <p>Royal Heritage and Architectural Splendor</p>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="card-header">🏰 Famous Landmarks</div>
+                    <div class="card-content">
+                        <h3>Magnificent Monuments</h3>
+                        <ul>
+                            <li>Amber Fort (Amer Palace)</li>
+                            <li>Hawa Mahal (Palace of Winds)</li>
+                            <li>City Palace</li>
+                            <li>Jantar Mantar Observatory</li>
+                            <li>Jal Mahal (Water Palace)</li>
+                            <li>Nahargarh Fort</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">🍜 Traditional Cuisine</div>
+                    <div class="card-content">
+                        <h3>Royal Rajasthani Flavors</h3>
+                        <ul>
+                            <li>Dal Baati Churma</li>
+                            <li>Laal Maas</li>
+                            <li>Ghewar</li>
+                            <li>Pyaaz Kachori</li>
+                            <li>Kalakand</li>
+                            <li>Rajasthani Thali</li>
+                            <li>Mawa Kachori</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">🎭 Traditional Arts</div>
+                    <div class="card-content">
+                        <h3>Artistic Excellence</h3>
+                        <ul>
+                            <li>Block Printing</li>
+                            <li>Blue Pottery</li>
+                            <li>Gem Cutting & Jewelry</li>
+                            <li>Bandhani (Tie-Dye)</li>
+                            <li>Miniature Paintings</li>
+                            <li>Marble Sculptures</li>
+                            <li>Leatherwork (Mojari)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">💃 Cultural Traditions</div>
+                    <div class="card-content">
+                        <h3>Living Culture</h3>
+                        <ul>
+                            <li>Ghoomar Dance</li>
+                            <li>Kathputli (Puppet Shows)</li>
+                            <li>Folk Music & Ballads</li>
+                            <li>Teej & Gangaur Festivals</li>
+                            <li>Elephant Festival</li>
+                            <li>Traditional Turbans</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="city-section">
+            <div class="city-header" style="background: linear-gradient(135deg, #8b0000, #c41e3a);">
+                <h2>About This Heritage Project</h2>
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <h3>Our Mission</h3>
+                    <p style="margin-bottom: 1rem;">This website is dedicated to preserving and promoting the incredible cultural heritage, cuisine, traditional arts, and famous landmarks of Varanasi and Jaipur. These two cities represent the spiritual and royal essence of India, each with thousands of years of living traditions.</p>
+                    
+                    <h3>Why These Cities Matter</h3>
+                    <p style="margin-bottom: 1rem;"><strong>Varanasi</strong>, one of the world's oldest continuously inhabited cities, is the spiritual heart of India. Its ghats, temples, and traditions have remained vibrant for millennia, offering a glimpse into ancient Indian civilization.</p>
+                    
+                    <p><strong>Jaipur</strong>, founded in 1727, showcases the architectural brilliance and cultural sophistication of Rajputana. Its palaces, forts, and artistic traditions reflect the grandeur of royal India.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p><strong>Preserving India's Cultural Legacy</strong></p>
+        <p>Celebrating the heritage of Varanasi and Jaipur</p>
+        <p>© 2024 - A tribute to India's timeless traditions</p>
+    </footer>
+</body>
+</html>
