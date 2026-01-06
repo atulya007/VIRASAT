@@ -73,7 +73,7 @@ export default function Home() {
             <div className="relative z-10">
               <h2 className="text-2xl md:text-3xl font-semibold mb-3">Journey Through Sacred and Royal India</h2>
               <p className="mx-auto max-w-3xl text-base md:text-lg leading-relaxed text-gray-700">
-                Discover the spiritual essence of Varanasi and the regal magnificence of Jaipur—two jewels that encapsulate India's timeless heritage, living traditions, and architectural splendor.
+                Discover the spiritual essence of Varanasi, the regal magnificence of Jaipur, and the temple splendor of Madurai—three jewels that encapsulate India's timeless heritage, living traditions, and architectural splendor.
               </p>
             </div>
           </div>
@@ -188,7 +188,21 @@ export default function Home() {
               <p className="text-sm text-gray-300 tracking-widest">Exploring Indian Culture & Heritage</p>
             </div>
           <p className="text-gray-400 mb-4"> 2025 - A tribute to India's timeless traditions and living heritage</p>
-          <p className="text-xs text-gray-500">Preserving the essence of two magnificent Indian cities</p>
+          <div className="flex justify-center space-x-6 mb-4">
+            <Link href="/festivals" className="text-gray-300 hover:text-white transition">
+              Festivals
+            </Link>
+            <Link href="/varanasi" className="text-gray-300 hover:text-white transition">
+              Varanasi
+            </Link>
+            <Link href="/jaipur" className="text-gray-300 hover:text-white transition">
+              Jaipur
+            </Link>
+            <Link href="/madurai" className="text-gray-300 hover:text-white transition">
+              Madurai
+            </Link>
+          </div>
+          <p className="text-xs text-gray-500">Preserving the essence of magnificent Indian cities</p>
         </footer>
       </div>
     </main>

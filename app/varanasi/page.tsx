@@ -2,6 +2,9 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import Breadcrumbs from '../components/Breadcrumbs';
+import ShareButtons from '../components/ShareButtons';
+import { FavoriteButton } from '../components/FavoriteButton';
 
 const PlaceCard = ({ name, desc, onView }: { name: string; desc: string; onView?: () => void }) => (
   <div className="rounded-lg border-l-4 border-red-600 bg-orange-50 p-6 transition hover:translate-x-2">
@@ -94,9 +97,14 @@ export default function Varanasi() {
       <header className="bg-gradient-to-r from-red-600 to-red-800 py-8 text-center text-white shadow-lg">
         <h1 className="text-4xl font-bold drop-shadow-lg">🛕 Varanasi - The Eternal City 🛕</h1>
         <p className="mt-2 text-sm">Part of VIRASAT - Exploring Indian Culture & Heritage</p>
+        <div className="mt-4">
+          <ShareButtons url="/varanasi" title="Explore Varanasi - The Eternal City | VIRASAT" />
+        </div>
       </header>
 
       <div className="mx-auto max-w-6xl px-4 py-12">
+        <Breadcrumbs items={[{ label: 'Varanasi' }]} />
+
         {/* Hero Image - Varanasi Vibe */}
         <section className="mb-8 rounded-xl overflow-hidden">
           <div className="relative h-64 w-full overflow-hidden rounded-xl shadow-lg">
@@ -169,14 +177,15 @@ export default function Varanasi() {
           </div>
         </section>
 
-        {/* Gallery: Cuisine */}
+        {/* Gallery: Traditional Cuisine */}
         <section className="mb-12 rounded-xl bg-white p-8 shadow-lg">
-          <h2 className="mb-6 border-b-4 border-orange-400 pb-2 text-3xl font-bold text-red-700">📸 Gallery — Cuisine</h2>
+          <h2 className="mb-6 border-b-4 border-orange-400 pb-2 text-3xl font-bold text-red-700">🍽️ Gallery — Traditional Cuisine</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              { src: '/images/varanasi/food-kachori.jpg', alt: 'Kachori Sabzi', fallback: 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800&h=600&fit=crop' },
-              { src: '/images/varanasi/food-malaiyo.jpg', alt: 'Malaiyo', fallback: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=800&h=600&fit=crop' },
-              { src: '/images/varanasi/food-paan.jpg', alt: 'Banarasi Paan', fallback: 'https://images.unsplash.com/photo-1526318472351-c75fcf0700d8?w=800&h=600&fit=crop' },
+              { src: '/images/varanasi/kachori-sabzi.jpg', alt: 'Kachori Sabzi', fallback: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=800&h=600&fit=crop' },
+              { src: '/images/varanasi/baati-chokha.jpg', alt: 'Baati Chokha', fallback: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&h=600&fit=crop' },
+              { src: '/images/varanasi/malaiyo.jpg', alt: 'Malaiyo', fallback: 'https://images.unsplash.com/photo-1579954115545-a95591f28bfc?w=800&h=600&fit=crop' },
+              { src: '/images/varanasi/lassi-thandai.jpg', alt: 'Lassi & Thandai', fallback: 'https://images.unsplash.com/photo-1551024506-0bccd828d307?w=800&h=600&fit=crop' },
             ].map((img, i) => (
               <div key={i} className="overflow-hidden rounded-lg">
                 <img
@@ -190,7 +199,106 @@ export default function Varanasi() {
           </div>
         </section>
 
-        {/* About Section */}
+        {/* Festivals & Events */}
+        <section className="mb-12 rounded-xl bg-white p-8 shadow-lg">
+          <h2 className="mb-6 border-b-4 border-orange-400 pb-2 text-3xl font-bold text-red-700">🎉 Festivals & Events</h2>
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="rounded-lg border-l-4 border-red-600 bg-orange-50 p-6">
+              <h3 className="mb-3 text-xl font-bold text-red-700">Maha Shivaratri</h3>
+              <p className="mb-4 text-gray-700">A major Hindu festival celebrating Lord Shiva, with night-long prayers and processions.</p>
+              <p className="text-sm text-gray-600">Usually in February/March</p>
+            </div>
+            <div className="rounded-lg border-l-4 border-red-600 bg-orange-50 p-6">
+              <h3 className="mb-3 text-xl font-bold text-red-700">Ganga Dussehra</h3>
+              <p className="mb-4 text-gray-700">Celebrates the descent of the Ganges River, with special rituals and illuminations.</p>
+              <p className="text-sm text-gray-600">Usually in May/June</p>
+            </div>
+            <div className="rounded-lg border-l-4 border-red-600 bg-orange-50 p-6">
+              <h3 className="mb-3 text-xl font-bold text-red-700">Dev Deepawali</h3>
+              <p className="mb-4 text-gray-700">Festival of lights on the ghats, symbolizing the victory of good over evil.</p>
+              <p className="text-sm text-gray-600">Usually in November</p>
+            </div>
+            <div className="rounded-lg border-l-4 border-red-600 bg-orange-50 p-6">
+              <h3 className="mb-3 text-xl font-bold text-red-700">Chhath Puja</h3>
+              <p className="mb-4 text-gray-700">A festival dedicated to the Sun God, with offerings at the ghats.</p>
+              <p className="text-sm text-gray-600">Usually in October/November</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Historical Timeline */}
+        <section className="mb-12 rounded-xl bg-white p-8 shadow-lg">
+          <h2 className="mb-6 border-b-4 border-orange-400 pb-2 text-3xl font-bold text-red-700">⏳ Historical Timeline</h2>
+          <div className="space-y-4">
+            <div className="flex items-start space-x-4">
+              <div className="flex-shrink-0 w-20 text-right">
+                <span className="text-lg font-bold text-red-700">1200 BCE</span>
+              </div>
+              <div className="flex-shrink-0 w-4 h-4 bg-red-600 rounded-full mt-2"></div>
+              <div className="flex-1">
+                <p className="text-gray-700">Ancient Vedic period - Varanasi mentioned in Rigveda as a sacred city.</p>
+              </div>
+            </div>
+            <div className="flex items-start space-x-4">
+              <div className="flex-shrink-0 w-20 text-right">
+                <span className="text-lg font-bold text-red-700">5th Century BCE</span>
+              </div>
+              <div className="flex-shrink-0 w-4 h-4 bg-red-600 rounded-full mt-2"></div>
+              <div className="flex-1">
+                <p className="text-gray-700">Buddha visits Varanasi and delivers his first sermon at Sarnath.</p>
+              </div>
+            </div>
+            <div className="flex items-start space-x-4">
+              <div className="flex-shrink-0 w-20 text-right">
+                <span className="text-lg font-bold text-red-700">12th Century CE</span>
+              </div>
+              <div className="flex-shrink-0 w-4 h-4 bg-red-600 rounded-full mt-2"></div>
+              <div className="flex-1">
+                <p className="text-gray-700">Muslim conquest and establishment of Mughal influence.</p>
+              </div>
+            </div>
+            <div className="flex items-start space-x-4">
+              <div className="flex-shrink-0 w-20 text-right">
+                <span className="text-lg font-bold text-red-700">18th Century</span>
+              </div>
+              <div className="flex-shrink-0 w-4 h-4 bg-red-600 rounded-full mt-2"></div>
+              <div className="flex-1">
+                <p className="text-gray-700">British colonial period begins, Varanasi becomes a center of education and culture.</p>
+              </div>
+            </div>
+            <div className="flex items-start space-x-4">
+              <div className="flex-shrink-0 w-20 text-right">
+                <span className="text-lg font-bold text-red-700">1947</span>
+              </div>
+              <div className="flex-shrink-0 w-4 h-4 bg-red-600 rounded-full mt-2"></div>
+              <div className="flex-1">
+                <p className="text-gray-700">Independence of India, Varanasi becomes part of Uttar Pradesh.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* Local Artisans & Crafts */}
+        <section className="mb-12 rounded-xl bg-white p-8 shadow-lg">
+          <h2 className="mb-6 border-b-4 border-orange-400 pb-2 text-3xl font-bold text-red-700">🎨 Local Artisans & Crafts</h2>
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="rounded-lg border-2 border-orange-400 bg-gradient-to-b from-yellow-50 to-orange-50 p-6">
+              <h3 className="mb-2 text-lg font-bold text-red-700">Banarasi Silk Weaving</h3>
+              <p className="text-gray-700">Intricate silk sarees and fabrics woven with gold threads, a UNESCO-recognized craft.</p>
+            </div>
+            <div className="rounded-lg border-2 border-orange-400 bg-gradient-to-b from-yellow-50 to-orange-50 p-6">
+              <h3 className="mb-2 text-lg font-bold text-red-700">Brassware Crafting</h3>
+              <p className="text-gray-700">Handcrafted brass utensils and idols, known for their durability and traditional designs.</p>
+            </div>
+            <div className="rounded-lg border-2 border-orange-400 bg-gradient-to-b from-yellow-50 to-orange-50 p-6">
+              <h3 className="mb-2 text-lg font-bold text-red-700">Wooden Toys</h3>
+              <p className="text-gray-700">Colorful wooden toys and figurines carved by skilled artisans in the old city.</p>
+            </div>
+            <div className="rounded-lg border-2 border-orange-400 bg-gradient-to-b from-yellow-50 to-orange-50 p-6">
+              <h3 className="mb-2 text-lg font-bold text-red-700">Paan Making</h3>
+              <p className="text-gray-700">Art of preparing betel leaf with spices, a traditional delicacy passed down through generations.</p>
+            </div>
+          </div>
+        </section>
         <section className="mb-12 rounded-xl bg-white p-8 shadow-lg">
           <h2 className="mb-6 border-b-4 border-orange-400 pb-2 text-3xl font-bold text-red-700">📖 About Varanasi</h2>
           <div className="space-y-4 text-justify text-gray-700 leading-relaxed">
@@ -215,6 +323,7 @@ export default function Varanasi() {
             </p>
           </div>
         </section>
+
       </div>
 
       <footer className="mt-8 bg-gray-800 px-4 py-8 text-center text-gray-200">

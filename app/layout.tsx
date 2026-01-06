@@ -19,8 +19,10 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Varanasi & Jaipur Heritage",
-  description: "Explore the cultural heritage of Varanasi and Jaipur",
+  title: "VIRASAT - Exploring Indian Culture & Heritage",
+  description: "Discover the rich cultural heritage of Indian cities",
+  manifest: "/manifest.json",
+  themeColor: "#ea580c",
 };
 
 export default function RootLayout({
@@ -31,7 +33,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased`}>
-        {/* header removed as requested (no fixed logo) */}
         <main className="w-full px-4 md:px-8 lg:px-12 py-4">{children}</main>
       </body>
     </html>

@@ -1,0 +1,21 @@
+{
+  "name": "VIRASAT - Exploring Indian Culture & Heritage",
+  "short_name": "VIRASAT",
+  "description": "Discover the rich cultural heritage of Indian cities",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ea580c",
+  "icons": [
+    {
+      "src": "/images/varanasi/cover.jpg",
+      "sizes": "192x192",
+      "type": "image/jpg"
+    },
+    {
+      "src": "/images/varanasi/cover.jpg",
+      "sizes": "512x512",
+      "type": "image/jpg"
+    }
+  ]
+}

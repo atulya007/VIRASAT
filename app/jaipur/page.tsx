@@ -1,21 +1,16 @@
 'use client';
 
 import Link from 'next/link';
+import { useState } from 'react';
+import Breadcrumbs from '../components/Breadcrumbs';
+import ShareButtons from '../components/ShareButtons';
 
-const PlaceCard = ({ name, desc }: { name: string; desc: string }) => (
+const PlaceCard = ({ name, desc, onView }: { name: string; desc: string; onView?: () => void }) => (
   <div className="rounded-lg border-l-4 border-orange-500 bg-yellow-50 p-6 transition hover:translate-x-2">
     <h3 className="mb-3 text-xl font-bold text-orange-600">{name}</h3>
     <p className="mb-4 text-gray-700">{desc}</p>
-    <div className="h-48 w-full rounded-lg bg-gray-300">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.0893098648703!2d75.7873!3d26.9124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396c4adf4c57a28d%3A0xce1c63a3b6012e89!2sJaipur!5e0!3m2!1sen!2sin!4v1701520000000"
-        width="100%"
-        height="100%"
-        style={{ border: 0 }}
-        allowFullScreen={true}
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-      ></iframe>
+    <div className="mt-3">
+      <button onClick={onView} className="btn-cta">View on map</button>
     </div>
   </div>
 );
@@ -27,7 +22,25 @@ const CuisineItem = ({ name, desc }: { name: string; desc: string }) => (
   </div>
 );
 
+const MapEmbed = ({ query }: { query: string }) => {
+  const embedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(query)}&t=&z=14&ie=UTF8&iwloc=&output=embed`;
+
+  return (
+    <iframe
+      src={embedUrl}
+      width="100%"
+      height="100%"
+      style={{ border: 0 }}
+      allowFullScreen={true}
+      loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
+    ></iframe>
+  );
+};
+
 export default function Jaipur() {
+  const [mapQuery, setMapQuery] = useState('Jaipur, Rajasthan, India');
+
   const places = [
     {
       name: 'Amber Fort (Amer Palace)',
@@ -84,6 +97,9 @@ export default function Jaipur() {
       </Link>
 
       <header className="bg-gradient-to-r from-orange-500 to-orange-600 py-8 text-center text-white shadow-lg">
+        <div className="mb-4">
+          <ShareButtons url="/jaipur" title="Explore Jaipur - The Pink City | VIRASAT" />
+        </div>
         <h1 className="text-4xl font-bold drop-shadow-lg">🏰 Jaipur - The Pink City 🏰</h1>
         <p className="mt-2 text-sm">Part of VIRASAT - Exploring Indian Culture & Heritage</p>
       </header>
@@ -105,19 +121,14 @@ export default function Jaipur() {
           </div>
         </section>
 
-        {/* Map Section */}
+        <Breadcrumbs items={[{ label: 'Jaipur' }]} />
+
+        {/* Map Section (interactive: updates when user clicks 'View on map') */}
         <section className="mb-12 rounded-xl bg-white p-8 shadow-lg">
           <h2 className="mb-6 border-b-4 border-orange-400 pb-2 text-3xl font-bold text-orange-600">📍 Location Map</h2>
           <div className="h-96 w-full rounded-lg overflow-hidden">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.0893098648703!2d75.7873!3d26.9124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396c4adf4c57a28d%3A0xce1c63a3b6012e89!2sJaipur!5e0!3m2!1sen!2sin!4v1701520000000"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen={true}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+            {/* mapQuery state controls which place is shown with a pin */}
+            <MapEmbed query={mapQuery} />
           </div>
         </section>
 
@@ -126,7 +137,34 @@ export default function Jaipur() {
           <h2 className="mb-6 border-b-4 border-orange-400 pb-2 text-3xl font-bold text-orange-600">🏛️ Popular Places to Visit</h2>
           <div className="grid gap-6 md:grid-cols-2">
             {places.map((place, i) => (
-              <PlaceCard key={i} name={place.name} desc={place.desc} />
+              <PlaceCard
+                key={i}
+                name={place.name}
+                desc={place.desc}
+                onView={() => setMapQuery(`${place.name}, Jaipur, India`)}
+              />
+            ))}
+          </div>
+        </section>
+
+        {/* Gallery: Popular Places */}
+        <section className="mb-12 rounded-xl bg-white p-8 shadow-lg">
+          <h2 className="mb-6 border-b-4 border-orange-400 pb-2 text-3xl font-bold text-orange-600">📸 Gallery — Popular Places</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { src: '/images/jaipur/amber-fort.jpg', alt: 'Amber Fort', fallback: 'https://images.unsplash.com/photo-1587135941948-670b381f08ce?w=800&h=600&fit=crop' },
+              { src: '/images/jaipur/hawa-mahal.jpg', alt: 'Hawa Mahal', fallback: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800&h=600&fit=crop' },
+              { src: '/images/jaipur/city-palace.jpg', alt: 'City Palace', fallback: 'https://images.unsplash.com/photo-1587135941948-670b381f08ce?w=800&h=600&fit=crop' },
+              { src: '/images/jaipur/jantar-mantar.jpg', alt: 'Jantar Mantar', fallback: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800&h=600&fit=crop' },
+            ].map((img, i) => (
+              <div key={i} className="overflow-hidden rounded-lg">
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  className="h-48 w-full object-cover"
+                  onError={(e) => { e.currentTarget.src = img.fallback; }}
+                />
+              </div>
             ))}
           </div>
         </section>
@@ -141,7 +179,129 @@ export default function Jaipur() {
           </div>
         </section>
 
-        {/* About Section */}
+        {/* Gallery: Traditional Cuisine */}
+        <section className="mb-12 rounded-xl bg-white p-8 shadow-lg">
+          <h2 className="mb-6 border-b-4 border-orange-400 pb-2 text-3xl font-bold text-orange-600">🍽️ Gallery — Traditional Cuisine</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { src: '/images/jaipur/dal-baati.jpg', alt: 'Dal Baati Churma', fallback: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&h=600&fit=crop' },
+              { src: '/images/jaipur/laal-maas.jpg', alt: 'Laal Maas', fallback: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=800&h=600&fit=crop' },
+              { src: '/images/jaipur/ghewar.jpg', alt: 'Ghewar', fallback: 'https://images.unsplash.com/photo-1579954115545-a95591f28bfc?w=800&h=600&fit=crop' },
+              { src: '/images/jaipur/pyaaz-kachori.jpg', alt: 'Pyaaz Kachori', fallback: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&h=600&fit=crop' },
+            ].map((img, i) => (
+              <div key={i} className="overflow-hidden rounded-lg">
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  className="h-48 w-full object-cover"
+                  onError={(e) => { e.currentTarget.src = img.fallback; }}
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Festivals */}
+        <section className="mb-12 rounded-xl bg-white p-8 shadow-lg">
+          <h2 className="mb-6 border-b-4 border-orange-400 pb-2 text-3xl font-bold text-orange-600">🎉 Festivals & Celebrations</h2>
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="rounded-lg border-2 border-orange-400 bg-gradient-to-b from-yellow-50 to-orange-50 p-6">
+              <h3 className="mb-3 text-xl font-bold text-orange-600">Elephant Festival</h3>
+              <p className="mb-4 text-gray-700">A grand celebration featuring decorated elephants, camel races, and traditional performances at the Amber Fort.</p>
+              <p className="text-sm text-gray-600">Usually in March</p>
+            </div>
+            <div className="rounded-lg border-2 border-orange-400 bg-gradient-to-b from-yellow-50 to-orange-50 p-6">
+              <h3 className="mb-3 text-xl font-bold text-orange-600">Teej Festival</h3>
+              <p className="mb-4 text-gray-700">A vibrant festival celebrating the arrival of monsoon, with women in traditional attire and folk music.</p>
+              <p className="text-sm text-gray-600">Usually in July/August</p>
+            </div>
+            <div className="rounded-lg border-2 border-orange-400 bg-gradient-to-b from-yellow-50 to-orange-50 p-6">
+              <h3 className="mb-3 text-xl font-bold text-orange-600">Gangaur Festival</h3>
+              <p className="mb-4 text-gray-700">A spring festival celebrating marital bliss with processions of beautifully decorated idols.</p>
+              <p className="text-sm text-gray-600">Usually in March/April</p>
+            </div>
+            <div className="rounded-lg border-2 border-orange-400 bg-gradient-to-b from-yellow-50 to-orange-50 p-6">
+              <h3 className="mb-3 text-xl font-bold text-orange-600">Kite Festival</h3>
+              <p className="mb-4 text-gray-700">Makar Sankranti celebrations with colorful kites filling the sky, symbolizing the triumph of good over evil.</p>
+              <p className="text-sm text-gray-600">Usually in January</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Historical Timeline */}
+        <section className="mb-12 rounded-xl bg-white p-8 shadow-lg">
+          <h2 className="mb-6 border-b-4 border-orange-400 pb-2 text-3xl font-bold text-orange-600">⏳ Historical Timeline</h2>
+          <div className="space-y-4">
+            <div className="flex items-start space-x-4">
+              <div className="flex-shrink-0 w-20 text-right">
+                <span className="text-lg font-bold text-orange-600">1727</span>
+              </div>
+              <div className="flex-shrink-0 w-4 h-4 bg-orange-600 rounded-full mt-2"></div>
+              <div className="flex-1">
+                <p className="text-gray-700">Jaipur founded by Maharaja Jai Singh II, one of India's first planned cities.</p>
+              </div>
+            </div>
+            <div className="flex items-start space-x-4">
+              <div className="flex-shrink-0 w-20 text-right">
+                <span className="text-lg font-bold text-orange-600">1734</span>
+              </div>
+              <div className="flex-shrink-0 w-4 h-4 bg-orange-600 rounded-full mt-2"></div>
+              <div className="flex-1">
+                <p className="text-gray-700">Construction of Jantar Mantar Observatory completed, showcasing astronomical instruments.</p>
+              </div>
+            </div>
+            <div className="flex items-start space-x-4">
+              <div className="flex-shrink-0 w-20 text-right">
+                <span className="text-lg font-bold text-orange-600">1799</span>
+              </div>
+              <div className="flex-shrink-0 w-4 h-4 bg-orange-600 rounded-full mt-2"></div>
+              <div className="flex-1">
+                <p className="text-gray-700">Hawa Mahal (Palace of Winds) completed, an architectural marvel with 953 windows.</p>
+              </div>
+            </div>
+            <div className="flex items-start space-x-4">
+              <div className="flex-shrink-0 w-20 text-right">
+                <span className="text-lg font-bold text-orange-600">1853</span>
+              </div>
+              <div className="flex-shrink-0 w-4 h-4 bg-orange-600 rounded-full mt-2"></div>
+              <div className="flex-1">
+                <p className="text-gray-700">Jaipur becomes the capital of the princely state during British colonial period.</p>
+              </div>
+            </div>
+            <div className="flex items-start space-x-4">
+              <div className="flex-shrink-0 w-20 text-right">
+                <span className="text-lg font-bold text-orange-600">1949</span>
+              </div>
+              <div className="flex-shrink-0 w-4 h-4 bg-orange-600 rounded-full mt-2"></div>
+              <div className="flex-1">
+                <p className="text-gray-700">Jaipur becomes part of independent India and designated as the capital of Rajasthan.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Local Artisans & Crafts */}
+        <section className="mb-12 rounded-xl bg-white p-8 shadow-lg">
+          <h2 className="mb-6 border-b-4 border-orange-400 pb-2 text-3xl font-bold text-orange-600">🎨 Local Artisans & Crafts</h2>
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="rounded-lg border-2 border-orange-400 bg-gradient-to-b from-yellow-50 to-orange-50 p-6">
+              <h3 className="mb-2 text-lg font-bold text-orange-600">Blue Pottery</h3>
+              <p className="text-gray-700">Unique glazed pottery with Persian and Mughal influences, featuring intricate blue designs on white backgrounds.</p>
+            </div>
+            <div className="rounded-lg border-2 border-orange-400 bg-gradient-to-b from-yellow-50 to-orange-50 p-6">
+              <h3 className="mb-2 text-lg font-bold text-orange-600">Block Printing</h3>
+              <p className="text-gray-700">Traditional textile printing using hand-carved wooden blocks, creating intricate patterns on fabrics.</p>
+            </div>
+            <div className="rounded-lg border-2 border-orange-400 bg-gradient-to-b from-yellow-50 to-orange-50 p-6">
+              <h3 className="mb-2 text-lg font-bold text-orange-600">Gem Cutting & Jewelry</h3>
+              <p className="text-gray-700">World-renowned craftsmanship in cutting and setting precious stones, especially emeralds and rubies.</p>
+            </div>
+            <div className="rounded-lg border-2 border-orange-400 bg-gradient-to-b from-yellow-50 to-orange-50 p-6">
+              <h3 className="mb-2 text-lg font-bold text-orange-600">Bandhani (Tie & Dye)</h3>
+              <p className="text-gray-700">Ancient resist-dyeing technique creating intricate patterns by tying and dyeing fabrics.</p>
+            </div>
+          </div>
+        </section>
         <section className="mb-12 rounded-xl bg-white p-8 shadow-lg">
           <h2 className="mb-6 border-b-4 border-orange-400 pb-2 text-3xl font-bold text-orange-600">📖 About Jaipur</h2>
           <div className="space-y-4 text-justify text-gray-700 leading-relaxed">
