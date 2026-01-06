@@ -1,21 +1,14 @@
 'use client';
 
 import Link from 'next/link';
+import { useState } from 'react';
 
-const PlaceCard = ({ name, desc }: { name: string; desc: string }) => (
+const PlaceCard = ({ name, desc, onView }: { name: string; desc: string; onView?: () => void }) => (
   <div className="rounded-lg border-l-4 border-red-600 bg-orange-50 p-6 transition hover:translate-x-2">
     <h3 className="mb-3 text-xl font-bold text-red-700">{name}</h3>
     <p className="mb-4 text-gray-700">{desc}</p>
-    <div className="h-48 w-full rounded-lg bg-gray-300">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3618.0893098648703!2d82.98149!3d25.3282!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e3165d8bb3605%3A0x63cd3c8aea6e0d33!2sVaranasi!5e0!3m2!1sen!2sin!4v1701520000000"
-        width="100%"
-        height="100%"
-        style={{ border: 0 }}
-        allowFullScreen={true}
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-      ></iframe>
+    <div className="mt-3">
+      <button onClick={onView} className="btn-cta">View on map</button>
     </div>
   </div>
 );
@@ -74,6 +67,21 @@ export default function Varanasi() {
     },
   ];
 
+  // interactive map state — updates when a place's "View on map" is clicked
+  const [mapQuery, setMapQuery] = useState('Varanasi, India');
+
+  const MapEmbed = () => (
+    <iframe
+      src={`https://maps.google.com/maps?q=${encodeURIComponent(mapQuery)}&t=&z=14&ie=UTF8&iwloc=&output=embed`}
+      width="100%"
+      height="100%"
+      style={{ border: 0 }}
+      allowFullScreen={true}
+      loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
+    />
+  );
+
   return (
     <div className="min-h-screen bg-orange-50">
       <Link
@@ -105,19 +113,12 @@ export default function Varanasi() {
           </div>
         </section>
 
-        {/* Map Section */}
+        {/* Map Section (interactive: updates when user clicks 'View on map') */}
         <section className="mb-12 rounded-xl bg-white p-8 shadow-lg">
           <h2 className="mb-6 border-b-4 border-orange-400 pb-2 text-3xl font-bold text-red-700">📍 Location Map</h2>
           <div className="h-96 w-full rounded-lg overflow-hidden">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3618.0893098648703!2d82.98149!3d25.3282!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e3165d8bb3605%3A0x63cd3c8aea6e0d33!2sVaranasi!5e0!3m2!1sen!2sin!4v1701520000000"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen={true}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+            {/* mapQuery state controls which place is shown with a pin */}
+            <MapEmbed />
           </div>
         </section>
 
@@ -126,7 +127,34 @@ export default function Varanasi() {
           <h2 className="mb-6 border-b-4 border-orange-400 pb-2 text-3xl font-bold text-red-700">🏛️ Popular Places to Visit</h2>
           <div className="grid gap-6 md:grid-cols-2">
             {places.map((place, i) => (
-              <PlaceCard key={i} name={place.name} desc={place.desc} />
+              <PlaceCard
+                key={i}
+                name={place.name}
+                desc={place.desc}
+                onView={() => setMapQuery(`${place.name}, Varanasi, India`)}
+              />
+            ))}
+          </div>
+        </section>
+
+        {/* Gallery: Popular Places */}
+        <section className="mb-12 rounded-xl bg-white p-8 shadow-lg">
+          <h2 className="mb-6 border-b-4 border-orange-400 pb-2 text-3xl font-bold text-red-700">📸 Gallery — Popular Places</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { src: '/images/varanasi/cover.jpg', alt: 'Kashi Vishwanath' , fallback: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800&h=600&fit=crop' },
+              { src: '/images/varanasi/dashashwamedh.jpg', alt: 'Dashashwamedh Ghat' , fallback: 'https://images.unsplash.com/photo-1505765056747-2c5d6c9b0c6e?w=800&h=600&fit=crop' },
+              { src: '/images/varanasi/sarnath.jpg', alt: 'Sarnath' , fallback: 'https://images.unsplash.com/photo-1559757175-5706f1b38b39?w=800&h=600&fit=crop' },
+              { src: '/images/varanasi/manikarnika.jpg', alt: 'Manikarnika Ghat' , fallback: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&h=600&fit=crop' },
+            ].map((img, i) => (
+              <div key={i} className="overflow-hidden rounded-lg">
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  className="h-48 w-full object-cover"
+                  onError={(e) => { e.currentTarget.src = img.fallback; }}
+                />
+              </div>
             ))}
           </div>
         </section>
@@ -137,6 +165,27 @@ export default function Varanasi() {
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {cuisine.map((item, i) => (
               <CuisineItem key={i} name={item.name} desc={item.desc} />
+            ))}
+          </div>
+        </section>
+
+        {/* Gallery: Cuisine */}
+        <section className="mb-12 rounded-xl bg-white p-8 shadow-lg">
+          <h2 className="mb-6 border-b-4 border-orange-400 pb-2 text-3xl font-bold text-red-700">📸 Gallery — Cuisine</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { src: '/images/varanasi/food-kachori.jpg', alt: 'Kachori Sabzi', fallback: 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800&h=600&fit=crop' },
+              { src: '/images/varanasi/food-malaiyo.jpg', alt: 'Malaiyo', fallback: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=800&h=600&fit=crop' },
+              { src: '/images/varanasi/food-paan.jpg', alt: 'Banarasi Paan', fallback: 'https://images.unsplash.com/photo-1526318472351-c75fcf0700d8?w=800&h=600&fit=crop' },
+            ].map((img, i) => (
+              <div key={i} className="overflow-hidden rounded-lg">
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  className="h-48 w-full object-cover"
+                  onError={(e) => { e.currentTarget.src = img.fallback; }}
+                />
+              </div>
             ))}
           </div>
         </section>

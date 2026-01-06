@@ -10,4 +10,75 @@ html, body {
 body {
   margin: 0;
   font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  /* theme variables for Indian/traditional palette */
+  --accent-amber: #c05621; /* deep amber */
+  --accent-saffron: #f59e0b; /* saffron */
+  --accent-oxide: #b45309; /* burnt orange */
+  --accent-emerald: #065f46; /* deep green */
+  --gold: #d4af37;
+  --muted-bg: rgba(255, 244, 232, 0.9);
 }
+
+/* Decorative mandala accent (subtle, non-intrusive) */
+.mandala-bg {
+  background-image: radial-gradient(circle at 10% 10%, rgba(212,175,55,0.06) 0, rgba(212,175,55,0.03) 2%, transparent 8%), radial-gradient(circle at 90% 80%, rgba(197,86,33,0.04) 0, rgba(197,86,33,0.02) 2%, transparent 8%);
+}
+
+/* Header tweaks for prominent, elegant look */
+.site-header {
+  border-bottom-width: 1px;
+  border-color: rgba(0,0,0,0.06);
+}
+.site-title {
+  color: var(--accent-amber);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #7a2e0d;
+  font-family: var(--font-display), Georgia, serif;
+}
+
+/* Button styles with Indian motif */
+.btn-cta {
+  background: linear-gradient(90deg, var(--accent-saffron), var(--accent-oxide));
+  color: white;
+  padding: .6rem 1.1rem;
+  border-radius: .75rem;
+  box-shadow: 0 8px 20px rgba(197,86,33,0.18);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.btn-cta:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(197,86,33,0.22); }
+
+/* Improve CTA focus accessibility */
+.btn-cta:focus { outline: 3px solid rgba(212,175,55,0.25); outline-offset: 2px; }
+
+/* Red variant for city-card CTAs (match Varanasi) */
+.btn-cta-red {
+  background: linear-gradient(90deg, #ef4444, #b91c1c);
+  box-shadow: 0 8px 20px rgba(185,28,28,0.18);
+}
+
+/* Card accent */
+.card-ornament { border-left: 6px solid var(--gold); }
+
+/* Subtle ornament under headings */
+.ornament-underline {
+  height: 6px;
+  width: 80px;
+  background: linear-gradient(90deg, rgba(212,175,55,0.9), rgba(197,86,33,0.9));
+  border-radius: 9999px;
+  margin: .5rem auto 1rem auto;
+}
+
+/* Allow page-level utility classes to control background (do not force white) */
+main { background-color: transparent; }
+
+/* Subtle entrance animation */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up { animation: fade-up 600ms ease both; }
+
+/* Card overlay stronger for readability */
+.card-ornament .absolute.inset-0 { background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0) 100%); }
+
